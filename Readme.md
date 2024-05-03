@@ -11,8 +11,8 @@ MiniDAO is a versatile polling application that empowers users to create surveys
 # Demo
 Experience MiniDAO's user interface and administrative capabilities through our live demos:
 
-1. [User Interface](somelink) - Explore the user experience. 
-2. [Administration Panel]() - Access administrative controls.
+1. [User Interface](https://moretech-forward.github.io/MiniDAO-front/minidao/index.html) - Explore the user experience. 
+2. [Administration Panel](https://moretech-forward.github.io/MiniDAO-front/minidao-admin/index.html) - Access administrative controls.
 
 # Feedback
 We value your feedback! Please leave your reviews and suggestions on our [Google Docs](https://docs.google.com/document/d/1B18EkMdZKfJIBc-rCqlAuUOhOcGvFTZnikDjzBGI4qc/edit?usp=sharing).
