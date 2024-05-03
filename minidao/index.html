@@ -1,0 +1,539 @@
+<body id="iwnb">
+<meta charset="UTF-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://cdn.jsdelivr.net/npm/daisyui@4.10.5/dist/full.min.css" rel="stylesheet" type="text/css"/>
+<link href="./output.css" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" rel="stylesheet" type="text/css"/>
+
+<div class="bg-base-100 w-full flex flex-col items-center gap-4 pt-36" id="loader" style="min-height: 800px;">
+    <span class="loading loading-ring loading-lg text-white"></span>
+    <p class="text-white text-3xl" id="init-text"></p>
+</div>
+
+<main class="p-6 bg-base-100 min-h-screen hidden" data-theme="dark" id="content" style="min-height: 1000px;">
+    <div class="navbar bg-neutral rounded-xl shadow-2xl">
+        <div class="navbar-start">
+            <div class="dropdown">
+                <div class="btn btn-ghost lg:hidden" role="button" tabindex="0">
+                    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 6h16M4 12h8m-8 6h16" stroke-linecap="round" stroke-linejoin="round"
+                              stroke-width="2"/>
+                    </svg>
+                </div>
+                <ul class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+                    tabindex="0">
+                    <li class="custom-link" data-page="templates"><a>Templates</a></li>
+                    <li class="custom-link" data-page="create"><a>Create Proposal</a></li>
+                    <li class="custom-link" data-page="donate"><a>Donate</a></li>
+                </ul>
+            </div>
+            <a class="btn btn-ghost text-xl custom-link" data-page="post-feed">MiniDAO</a>
+        </div>
+        <div class="navbar-end hidden lg:flex">
+            <ul class="menu menu-horizontal px-1">
+                <li class="custom-link" data-page="templates"><a>Templates</a></li>
+                <li class="custom-link" data-page="create"><a>Create Proposal</a></li>
+                <li class="custom-link" data-page="donate"><a>Donate</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <section class="custom-page flex flex-col gap-3 mt-10 mx-auto max-w-[800px]" id="post-feed">
+        <div class="flex flex-col gap-2">
+            <ul class="flex items-center gap-8">
+                <li class="text-sm">0x3D02...53F28</li>
+                <li class="list-disc text-sm">28.80.1022</li>
+            </ul>
+
+            <p class="text-white text-xl">Заголовок публикации какой-то</p>
+
+            <p class="line-clamp-6">
+                I was interviewing with a non-FAANG SaaS company for a Senior Full Stack role, and they gave me a
+                take-home technical test: create a React app in under 4 hours that searched Flickr.
+
+                To expedite, I used create-react-app and some snippets I already had on hand. It took me all of the
+                allotted time, but I turned in a functional app with some modern extras, like a loading skeleton.
+
+                It was to be reviewed by an engineer, and if it passed muster, I would be invited to go through it with
+                their engineering team. But alas, it did not pass their initial review, and I was rejected. I'm sure it
+                isn't perfect, but is there anything glaringly wrong with my project?
+            </p>
+
+            <div class="flex items-center justify-between mt-2">
+                <div class="flex items-center gap-4">
+                    <button class="btn btn-success">👍</button>
+                    <button class="btn btn-neutral">🙅</button>
+                    <button class="btn btn-error">👎</button>
+                </div>
+                <div class="flex items-center gap-4">
+                    <button class="btn btn-ghost text-red-500">228</button>
+                    <button class="btn btn-ghost">10</button>
+                    <button class="btn btn-ghost text-green-500">728</button>
+                </div>
+            </div>
+        </div>
+        <div class="divider"></div>
+    </section>
+    <section class="custom-page mt-10 hidden w-full" id="templates">
+        <div class="w-full flex flex-col items-center gap-10">
+            <div class="tabs tabs-boxed" role="tablist">
+                <a
+                        class="template-tab tab tab-active transition-all duration-200"
+                        data-card-id="issue-grant-card"
+                        role="tab"
+                >
+                    Issue grant
+                </a>
+                <a
+                        class="template-tab tab transition-all duration-200"
+                        data-card-id="additional-mint-card"
+                        role="tab"
+                >
+                    Additional mint
+                </a>
+                <a
+                        class="template-tab tab transition-all duration-200"
+                        data-card-id="erc20-grant-card"
+                        role="tab"
+                >
+                    Pay erc20 grant
+                </a>
+                <a
+                        class="template-tab tab transition-all duration-200"
+                        data-card-id="nft721-grant-card"
+                        role="tab"
+                >
+                    Pay NFT721 grant
+                </a>
+                <a
+                        class="template-tab tab transition-all duration-200"
+                        data-card-id="simple-voting-card"
+                        role="tab"
+                >
+                    Simple voting
+                </a>
+            </div>
+
+            <div>
+                <div class="template-card card w-96 bg-neutral shadow-xl" id="issue-grant-card">
+                    <form class="card-body flex flex-col space-y-4" id="issue-grant-form">
+                        <div class="flex flex-col gap-2">
+                            <label for="issue-grant-receiver-wallet">Receiver wallet address</label>
+                            <input class="input input-bordered w-full max-w-xs" id="issue-grant-receiver-wallet"
+                                   name="issue-grant-receiver-wallet"
+                                   placeholder="Enter wallet address"
+                                   required type="text">
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <label for="issue-grant-amount">Amount</label>
+                            <input class="input input-bordered w-full max-w-xs" id="issue-grant-amount"
+                                   name="issue-grant-amount"
+                                   placeholder="Enter value"
+                                   required type="text">
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <label for="issue-grant-description">Description</label>
+                            <textarea
+                                    class="textarea textarea-bordered min-h-36 max-h-96"
+                                    id="issue-grant-description"
+                                    name="issue-grant-description"
+                                    placeholder="Enter your description"
+                            ></textarea>
+                        </div>
+                        <button class="btn btn-primary">Create proposal</button>
+                    </form>
+                </div>
+
+                <div class="template-card  w-96 bg-neutral shadow-xl hidden" id="additional-mint-card">
+                    <form class="card-body flex flex-col space-y-4" id="additional-mint-form">
+                        <div class="flex flex-col gap-2">
+                            <label for="additional-mint-receiver-wallet">Receiver wallet address</label>
+                            <input class="input input-bordered w-full max-w-xs" id="additional-mint-receiver-wallet"
+                                   name="additional-mint-receiver-wallet"
+                                   placeholder="Enter wallet address"
+                                   required type="text">
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <label for="additional-mint-amount">Amount</label>
+                            <input class="input input-bordered w-full max-w-xs" id="additional-mint-amount"
+                                   name="additional-mint-amount"
+                                   placeholder="Enter value"
+                                   required type="text">
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <label for="additional-mint-description">Description</label>
+                            <textarea
+                                    class="textarea textarea-bordered min-h-36 max-h-96"
+                                    id="additional-mint-description"
+                                    name="additional-mint-description"
+                                    placeholder="Enter your description"
+                            ></textarea>
+                        </div>
+                        <button class="btn btn-primary">Create proposal</button>
+                    </form>
+                </div>
+
+                <div class="template-card w-96 bg-neutral shadow-xl hidden" id="erc20-grant-card">
+                    <form class="card-body flex flex-col space-y-4" id="erc20-grant-form">
+                        <div class="flex flex-col gap-2">
+                            <label for="erc20-grant-receiver-wallet">Receiver wallet address</label>
+                            <input class="input input-bordered w-full max-w-xs" id="erc20-grant-receiver-wallet"
+                                   name="erc20-grant-receiver-wallet"
+                                   placeholder="Enter wallet address"
+                                   required type="text">
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <label for="erc20-grant-amount">Amount</label>
+                            <input class="input input-bordered w-full max-w-xs" id="erc20-grant-amount"
+                                   name="erc20-grant-amount"
+                                   placeholder="Enter value"
+                                   required type="text">
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <label for="erc20-grant-token-address">Token address</label>
+                            <input class="input input-bordered w-full max-w-xs" id="erc20-grant-token-address"
+                                   name="erc20-grant-token-address"
+                                   placeholder="Enter token address"
+                                   required type="text">
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <label for="erc20-grant-description">Description</label>
+                            <textarea
+                                    class="textarea textarea-bordered min-h-36 max-h-96"
+                                    id="erc20-grant-description"
+                                    name="erc20-grant-description"
+                                    placeholder="Enter your description"
+                            ></textarea>
+                        </div>
+                        <button class="btn btn-primary">Create proposal</button>
+                    </form>
+                </div>
+
+                <div class="template-card w-96 bg-neutral shadow-xl hidden" id="nft721-grant-card">
+                    <form class="card-body flex flex-col space-y-4" id="nft721-grant-form">
+                        <div class="flex flex-col gap-2">
+                            <label for="nft721-grant-receiver-wallet">Receiver wallet address</label>
+                            <input class="input input-bordered w-full max-w-xs" id="nft721-grant-receiver-wallet"
+                                   name="nft721-grant-receiver-wallet"
+                                   placeholder="Enter wallet address"
+                                   required type="text">
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <label for="nft721-grant-id">ID</label>
+                            <input class="input input-bordered w-full max-w-xs" id="nft721-grant-id"
+                                   name="nft721-grant-id"
+                                   placeholder="Enter token id"
+                                   required type="text">
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <label for="nft721-grant-token-address">Token address</label>
+                            <input class="input input-bordered w-full max-w-xs" id="nft721-grant-token-address"
+                                   name="nft721-grant-token-address"
+                                   placeholder="Enter token address"
+                                   required type="text">
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <label for="nft721-grant-description">Description</label>
+                            <textarea
+                                    class="textarea textarea-bordered min-h-36 max-h-96"
+                                    id="nft721-grant-description"
+                                    name="nft721-grant-description"
+                                    placeholder="Enter your description"
+                            ></textarea>
+                        </div>
+                        <button class="btn btn-primary">Create proposal</button>
+                    </form>
+                </div>
+
+                <div class="template-card w-96 bg-neutral shadow-xl hidden" id="simple-voting-card">
+                    <form class="card-body flex flex-col space-y-4" id="simple-voting-form">
+                        <div class="flex flex-col gap-2">
+                            <label for="simple-voting-description">Description</label>
+                            <textarea
+                                    class="textarea textarea-bordered min-h-36 max-h-96"
+                                    id="simple-voting-description"
+                                    name="simple-voting-description"
+                                    placeholder="Enter your description"
+                            ></textarea>
+                        </div>
+                        <button class="btn btn-primary">Create proposal</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <section class="custom-page mt-10 hidden" id="create">
+        <div class="w-full flex flex-col items-center gap-10">
+            <div class="donate-card card w-96 bg-neutral shadow-xl" id="create-proposal-card">
+                <form class="card-body flex flex-col space-y-4" id="create-proposal-form">
+                    <div class="flex flex-col gap-2">
+                        <label for="create-proposal-targets">Targets</label>
+                        <textarea
+                                class="textarea textarea-bordered min-h-24 max-h-64"
+                                id="create-proposal-targets"
+                                name="create-proposal-targets"
+                                placeholder="Enter targets"
+                        ></textarea>
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <label for="create-proposal-values">Values</label>
+                        <textarea
+                                class="textarea textarea-bordered min-h-24 max-h-64"
+                                id="create-proposal-values"
+                                name="create-proposal-values"
+                                placeholder="Enter values"
+                        ></textarea>
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <label for="create-proposal-call-datas">Call datas</label>
+                        <textarea
+                                class="textarea textarea-bordered min-h-24 max-h-64"
+                                id="create-proposal-call-datas"
+                                name="create-proposal-call-datas"
+                                placeholder="Enter call datas"
+                        ></textarea>
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <label for="create-proposal-description">Description</label>
+                        <textarea
+                                class="textarea textarea-bordered min-h-24 max-h-64"
+                                id="create-proposal-description"
+                                name="create-proposal-description"
+                                placeholder="Enter your description"
+                        ></textarea>
+                    </div>
+                    <button class="btn btn-primary">
+                        Create proposal
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+    <section class="custom-page mt-10 hidden w-full" id="donate">
+        <div class="w-full flex flex-col items-center gap-10">
+            <p class="text-xl text-white my-3 max-w-[800px] text-center">
+                To donate money to us you can simply send ERC20 tokens and native network tokens to the address
+                <0x000000000000000000000000>
+            </p>
+            <div class="tabs tabs-boxed" role="tablist">
+                <a
+                        class="donate-tab tab tab-active transition-all duration-200"
+                        data-card-id="donate-native-token"
+                        id="donate-native-tab"
+                        role="tab"
+                >
+                    Native
+                </a>
+                <a
+                        class="donate-tab tab transition-all duration-200"
+                        data-card-id="donate-erc20"
+                        id="donate-erc-tab"
+                        role="tab"
+                >
+                    ERC20
+                </a>
+            </div>
+            <div class="donate-card card w-96 bg-neutral shadow-xl" id="donate-native-token">
+                <form class="card-body flex flex-col space-y-4" id="native-token-form">
+                    <div class="flex flex-col gap-2">
+                        <label for="native-token-amount">Amount</label>
+                        <input class="input input-bordered w-full max-w-xs" id="native-token-amount"
+                               name="native-token-amount"
+                               placeholder="Enter value"
+                               required type="text">
+                    </div>
+                    <button class="btn btn-primary">Send transaction</button>
+                </form>
+            </div>
+            <div class="donate-card w-96 bg-neutral shadow-xl hidden" id="donate-erc20">
+                <form class="card-body flex flex-col space-y-4" id="erc20-form">
+                    <div class="flex flex-col gap-2">
+                        <label for="erc20-amount">Amount</label>
+                        <input class="input input-bordered w-full max-w-xs" id="erc20-amount" name="erc20-amount"
+                               placeholder="Enter value"
+                               required type="text">
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <label for="erc20-token-address">Token address</label>
+                        <input class="input input-bordered w-full max-w-xs" id="erc20-token-address"
+                               name="erc20-token-address"
+                               placeholder="Enter token address"
+                               required type="text">
+                    </div>
+                    <button class="btn btn-primary">Send</button>
+                </form>
+            </div>
+        </div>
+    </section>
+</main>
+
+<script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/toastify-js" type="text/javascript"></script>
+
+<!--utils-->
+<script>
+    const customCallToast = (msg) => {
+        Toastify({
+            text: msg,
+            position: "center",
+            gravity: "top",
+        }).showToast();
+    }
+
+    function shortenAddress(address) {
+        if (address.length < 10) return address; // Если адрес слишком короткий, возвращаем его как есть
+        return address.slice(0, 6) + "..." + address.slice(-5); // Возвращаем сокращенный адрес
+    }
+</script>
+
+<!--MAIN ROUTER-->
+<script>
+    document.querySelectorAll('.custom-link').forEach(link => {
+        link.addEventListener('click', () => {
+            const pageId = link.getAttribute('data-page');
+
+            document.querySelectorAll('.custom-page').forEach(section => {
+                if (section.id === pageId) {
+                    section.classList.remove('hidden');
+                    section.classList.add('block');
+                } else {
+                    section.classList.remove('block');
+                    section.classList.add('hidden');
+                }
+            });
+        });
+    });
+</script>
+
+<!--TABS IN DONATE ROUTER-->
+<script>
+    const donateTabs = document.querySelectorAll('.donate-tab')
+    const donateCards = document.querySelectorAll('.donate-card')
+
+    donateTabs.forEach(tab => {
+        tab.addEventListener('click', function () {
+            const cardId = tab.getAttribute('data-card-id')
+
+            donateTabs.forEach((tab) => tab.classList.remove("tab-active"));
+            // Add 'tab-active' class to the clicked tab
+            tab.classList.add("tab-active");
+
+            donateCards.forEach(card => {
+                if (card.id === cardId) {
+                    card.classList.remove('hidden')
+                    card.classList.add('card')
+                } else {
+                    card.classList.add('hidden')
+                    card.classList.remove('card')
+                }
+            })
+        })
+    })
+</script>
+
+<!--loading animation-->
+<script>
+    const loader = document.getElementById('loader');
+    const content = document.getElementById('content');
+
+    var typed = new Typed('#init-text', {
+        strings: ['Initializing app...', 'Get contract info...'],
+        typeSpeed: 30,
+        backSpeed: 0,
+    });
+
+    setTimeout(() => {
+        loader.classList.remove('flex')
+        loader.classList.add('hidden')
+
+        content.classList.remove('hidden')
+    }, 3000)
+</script>
+
+<!--initializing app in ethers-->
+<script>
+    const contractAddress;
+    const signer;
+    const connectedContract;
+
+    const initApp = async () => {
+
+    }
+
+    setTimeout(() => {
+        initApp()
+    }, 2000)
+</script>
+
+<!--TABS IN DONATE ROUTER-->
+<script>
+    const templateTabs = document.querySelectorAll('.template-tab')
+    const templateCards = document.querySelectorAll('.template-card')
+
+    templateTabs.forEach(tab => {
+        tab.addEventListener('click', function () {
+            const cardId = tab.getAttribute('data-card-id')
+
+            templateTabs.forEach((tab) => tab.classList.remove("tab-active"));
+            // Add 'tab-active' class to the clicked tab
+            tab.classList.add("tab-active");
+
+            templateCards.forEach(card => {
+                if (card.id === cardId) {
+                    card.classList.remove('hidden')
+                    card.classList.add('card')
+                } else {
+                    card.classList.add('hidden')
+                    card.classList.remove('card')
+                }
+            })
+        })
+    })
+</script>
+<!--processing templates-->
+<script>
+</script>
+
+<!--processing donate forms-->
+<script>
+    const nativeTokenForm = document.getElementById('native-token-form')
+    const erc20Form = document.getElementById('erc20-form')
+
+    nativeTokenForm.addEventListener('submit', e => {
+        e.preventDefault();
+        const formData = new FormData(nativeTokenForm);
+        const native_token_amount = formData.get('native-token-amount')
+
+        try {
+            // ethers js code
+            nativeTokenForm.reset()
+            customCallToast('Success call sendTransaction!')
+        } catch (e) {
+            console.log(e)
+            customCallToast('Error call sendTransaction!')
+        }
+    })
+
+    erc20Form.addEventListener('submit', e => {
+        e.preventDefault();
+        const formData = new FormData(erc20Form)
+        const erc20_amount = formData.get('erc20-amount')
+        const erc20_token_address = formData.get('erc20-token-address')
+
+        if (!/^0x[a-fA-F0-9]{40}$/.test(erc20_token_address)) {
+            customCallToast('Wrong address')
+        }
+
+        try {
+            // ethers js code
+            erc20Form.reset()
+            customCallToast('Success call sendTransaction!')
+        } catch (e) {
+            console.log(e)
+            customCallToast('Error call sendTransaction!')
+        }
+    })
+</script>
+</body>
