@@ -1,674 +1,878 @@
 <body id="iwnb">
-<meta charset="UTF-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<link href="https://cdn.jsdelivr.net/npm/daisyui@4.10.5/dist/full.min.css" rel="stylesheet" type="text/css"/>
-<link href="./output.css" rel="stylesheet"/>
-<link href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" rel="stylesheet" type="text/css"/>
+  <meta charset="UTF-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <link
+    href="https://cdn.jsdelivr.net/npm/daisyui@4.10.5/dist/full.min.css"
+    rel="stylesheet"
+    type="text/css"
+  />
+  <link href="./output.css" rel="stylesheet" />
+  <link
+    href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
+    rel="stylesheet"
+    type="text/css"
+  />
 
-<div class="bg-base-100 w-full flex flex-col items-center gap-4 pt-36" id="loader" style="min-height: 800px;">
+  <p id="future_address" class="hidden invisible"></p>
+  <div class="p-2 hidden invisible">
+    <div class="accordion">
+      <div class="accordion-item">
+        <section class="m-auto w-100">
+          <h3 id="headingOne" class="accordion-header text-center">
+            <button
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapse_myAddr"
+              aria-expanded="true"
+              aria-controls="collapse_myAddr"
+              class="accordion-button collapsed"
+            >
+              myAddr
+            </button>
+          </h3>
+          <div
+            id="collapse_myAddr"
+            aria-labelledby="headingOne"
+            data-bs-parent="#accordionExample"
+            class="accordion-collapse collapse"
+          >
+            <div class="accordion-body">
+              <form id="form-myAddr" class="d-flex flex-column gap-2 p-2">
+                <div>
+                  <button
+                    id="btn"
+                    type="button"
+                    data-form-name="myAddr"
+                    class="btn btn-primary mt-2"
+                  >
+                    Read
+                  </button>
+                </div>
+                <div>
+                  <p>Response:</p>
+                  <div>
+                    :
+                    <span
+                      id="form-output-myAddr-0"
+                      data-form-name="myAddr"
+                      data-field-type="address"
+                      >address</span
+                    >
+                    <br />
+                  </div>
+                </div>
+
+                <script>
+                  setTimeout(() => {
+                    const element = document.getElementById("btn");
+                    if (element) {
+                      element.click();
+
+                      setTimeout(() => {
+                        const future_address =
+                          document.getElementById("future_address");
+                        future_address.innerHTML = document.getElementById(
+                          "form-output-myAddr-0"
+                        ).innerHTML;
+                      }, 1000);
+                    }
+                  }, 1000);
+                </script>
+              </form>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="bg-base-100 w-full flex flex-col items-center gap-4 pt-36"
+    id="loader"
+    style="min-height: 1000px"
+    data-theme="dark"
+  >
     <span class="loading loading-ring loading-lg text-white"></span>
     <p class="text-white text-3xl" id="init-text"></p>
-</div>
+  </div>
 
-<main class="p-6 bg-base-100 min-h-screen hidden" data-theme="dark" id="content" style="min-height: 1000px;">
+  <main
+    class="p-6 bg-base-100 min-h-screen hidden"
+    data-theme="dark"
+    id="content"
+    style="min-height: 1000px"
+  >
     <div class="navbar bg-neutral rounded-xl shadow-2xl">
-        <div class="navbar-start">
-            <div class="dropdown">
-                <div class="btn btn-ghost lg:hidden" role="button" tabindex="0">
-                    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                         xmlns="http://www.w3.org/2000/svg">
-                        <path d="M4 6h16M4 12h8m-8 6h16" stroke-linecap="round" stroke-linejoin="round"
-                              stroke-width="2"/>
-                    </svg>
-                </div>
-                <ul class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
-                    tabindex="0">
-                    <li class="custom-link" data-page="templates"><a>Templates</a></li>
-                    <li class="custom-link" data-page="create"><a>Create Proposal</a></li>
-                    <li class="custom-link" data-page="donate"><a>Donate</a></li>
-                </ul>
-            </div>
-            <a class="btn btn-ghost text-xl custom-link" data-page="post-feed">MiniDAO</a>
+      <div class="navbar-start">
+        <div class="dropdown">
+          <div class="btn btn-ghost lg:hidden" role="button" tabindex="0">
+            <svg
+              class="h-5 w-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M4 6h16M4 12h8m-8 6h16"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+              />
+            </svg>
+          </div>
+          <ul
+            class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+            tabindex="0"
+          >
+            <li class="custom-link" data-page="templates"><a>Templates</a></li>
+            <li class="custom-link" data-page="create">
+              <a>Create Proposal</a>
+            </li>
+            <li class="custom-link" data-page="donate"><a>Donate</a></li>
+          </ul>
         </div>
-        <div class="navbar-end hidden lg:flex">
-            <ul class="menu menu-horizontal px-1">
-                <li class="custom-link" data-page="templates"><a>Templates</a></li>
-                <li class="custom-link" data-page="create"><a>Create Proposal</a></li>
-                <li class="custom-link" data-page="donate"><a>Donate</a></li>
-            </ul>
-        </div>
+        <a class="btn btn-ghost text-xl custom-link" data-page="post-feed"
+          >MiniDAO</a
+        >
+      </div>
+      <div class="navbar-end hidden lg:flex">
+        <ul class="menu menu-horizontal px-1">
+          <li class="custom-link" data-page="templates"><a>Templates</a></li>
+          <li class="custom-link" data-page="create"><a>Create Proposal</a></li>
+          <li class="custom-link" data-page="donate"><a>Donate</a></li>
+        </ul>
+      </div>
     </div>
 
-    <section class="custom-page flex flex-col gap-3 mt-10 mx-auto max-w-[800px]" id="post-feed">
-
-    </section>
+    <section
+      class="custom-page flex flex-col gap-3 mt-10 mx-auto max-w-[800px]"
+      id="post-feed"
+    ></section>
     <section class="custom-page mt-10 hidden w-full" id="templates">
-        <div class="w-full flex flex-col items-center gap-10">
-            <div class="tabs tabs-boxed" role="tablist">
-                <a
-                        class="template-tab tab tab-active transition-all duration-200"
-                        data-card-id="issue-grant-card"
-                        role="tab"
-                >
-                    Issue grant
-                </a>
-                <a
-                        class="template-tab tab transition-all duration-200"
-                        data-card-id="additional-mint-card"
-                        role="tab"
-                >
-                    Additional mint
-                </a>
-                <a
-                        class="template-tab tab transition-all duration-200"
-                        data-card-id="erc20-grant-card"
-                        role="tab"
-                >
-                    Pay erc20 grant
-                </a>
-                <a
-                        class="template-tab tab transition-all duration-200"
-                        data-card-id="nft721-grant-card"
-                        role="tab"
-                >
-                    Pay NFT721 grant
-                </a>
-                <a
-                        class="template-tab tab transition-all duration-200"
-                        data-card-id="simple-voting-card"
-                        role="tab"
-                >
-                    Simple voting
-                </a>
-            </div>
-
-            <div>
-                <div class="template-card card w-96 bg-neutral shadow-xl" id="issue-grant-card">
-                    <form class="card-body flex flex-col space-y-4" id="issue-grant-form">
-                        <div class="flex flex-col gap-2">
-                            <label for="issue-grant-receiver-wallet">Receiver wallet address</label>
-                            <input class="input input-bordered w-full max-w-xs" id="issue-grant-receiver-wallet"
-                                   name="issue-grant-receiver-wallet"
-                                   placeholder="Enter wallet address"
-                                   required type="text">
-                        </div>
-                        <div class="flex flex-col gap-2">
-                            <label for="issue-grant-amount">Amount</label>
-                            <input class="input input-bordered w-full max-w-xs" id="issue-grant-amount"
-                                   name="issue-grant-amount"
-                                   placeholder="Enter value"
-                                   required type="text">
-                        </div>
-                        <div class="flex flex-col gap-2">
-                            <label for="issue-grant-description">Description</label>
-                            <textarea
-                                    class="textarea textarea-bordered min-h-36 max-h-96"
-                                    id="issue-grant-description"
-                                    name="issue-grant-description"
-                                    placeholder="Enter your description"
-                                    required
-                            ></textarea>
-                        </div>
-                        <button class="btn btn-primary">Create proposal</button>
-                    </form>
-                </div>
-
-                <div class="template-card  w-96 bg-neutral shadow-xl hidden" id="additional-mint-card">
-                    <form class="card-body flex flex-col space-y-4" id="additional-mint-form">
-                        <div class="flex flex-col gap-2">
-                            <label for="additional-mint-receiver-wallet">Receiver wallet address</label>
-                            <input class="input input-bordered w-full max-w-xs" id="additional-mint-receiver-wallet"
-                                   name="additional-mint-receiver-wallet"
-                                   placeholder="Enter wallet address"
-                                   required type="text">
-                        </div>
-                        <div class="flex flex-col gap-2">
-                            <label for="additional-mint-amount">Amount</label>
-                            <input class="input input-bordered w-full max-w-xs" id="additional-mint-amount"
-                                   name="additional-mint-amount"
-                                   placeholder="Enter value"
-                                   required type="text">
-                        </div>
-                        <div class="flex flex-col gap-2">
-                            <label for="additional-mint-description">Description</label>
-                            <textarea
-                                    class="textarea textarea-bordered min-h-36 max-h-96"
-                                    id="additional-mint-description"
-                                    name="additional-mint-description"
-                                    placeholder="Enter your description"
-                            ></textarea>
-                        </div>
-                        <button class="btn btn-primary">Create proposal</button>
-                    </form>
-                </div>
-
-                <div class="template-card w-96 bg-neutral shadow-xl hidden" id="erc20-grant-card">
-                    <form class="card-body flex flex-col space-y-4" id="erc20-grant-form">
-                        <div class="flex flex-col gap-2">
-                            <label for="erc20-grant-receiver-wallet">Receiver wallet address</label>
-                            <input class="input input-bordered w-full max-w-xs" id="erc20-grant-receiver-wallet"
-                                   name="erc20-grant-receiver-wallet"
-                                   placeholder="Enter wallet address"
-                                   required type="text">
-                        </div>
-                        <div class="flex flex-col gap-2">
-                            <label for="erc20-grant-amount">Amount</label>
-                            <input class="input input-bordered w-full max-w-xs" id="erc20-grant-amount"
-                                   name="erc20-grant-amount"
-                                   placeholder="Enter value"
-                                   required type="text">
-                        </div>
-                        <div class="flex flex-col gap-2">
-                            <label for="erc20-grant-token-address">Token address</label>
-                            <input class="input input-bordered w-full max-w-xs" id="erc20-grant-token-address"
-                                   name="erc20-grant-token-address"
-                                   placeholder="Enter token address"
-                                   required type="text">
-                        </div>
-                        <div class="flex flex-col gap-2">
-                            <label for="erc20-grant-description">Description</label>
-                            <textarea
-                                    class="textarea textarea-bordered min-h-36 max-h-96"
-                                    id="erc20-grant-description"
-                                    name="erc20-grant-description"
-                                    placeholder="Enter your description"
-                            ></textarea>
-                        </div>
-                        <button class="btn btn-primary">Create proposal</button>
-                    </form>
-                </div>
-
-                <div class="template-card w-96 bg-neutral shadow-xl hidden" id="nft721-grant-card">
-                    <form class="card-body flex flex-col space-y-4" id="nft721-grant-form">
-                        <div class="flex flex-col gap-2">
-                            <label for="nft721-grant-receiver-wallet">Receiver wallet address</label>
-                            <input class="input input-bordered w-full max-w-xs" id="nft721-grant-receiver-wallet"
-                                   name="nft721-grant-receiver-wallet"
-                                   placeholder="Enter wallet address"
-                                   required type="text">
-                        </div>
-                        <div class="flex flex-col gap-2">
-                            <label for="nft721-grant-id">ID</label>
-                            <input class="input input-bordered w-full max-w-xs" id="nft721-grant-id"
-                                   name="nft721-grant-id"
-                                   placeholder="Enter token id"
-                                   required type="text">
-                        </div>
-                        <div class="flex flex-col gap-2">
-                            <label for="nft721-grant-token-address">Token address</label>
-                            <input class="input input-bordered w-full max-w-xs" id="nft721-grant-token-address"
-                                   name="nft721-grant-token-address"
-                                   placeholder="Enter token address"
-                                   required type="text">
-                        </div>
-                        <div class="flex flex-col gap-2">
-                            <label for="nft721-grant-description">Description</label>
-                            <textarea
-                                    class="textarea textarea-bordered min-h-36 max-h-96"
-                                    id="nft721-grant-description"
-                                    name="nft721-grant-description"
-                                    placeholder="Enter your description"
-                            ></textarea>
-                        </div>
-                        <button class="btn btn-primary">Create proposal</button>
-                    </form>
-                </div>
-
-                <div class="template-card w-96 bg-neutral shadow-xl hidden" id="simple-voting-card">
-                    <form class="card-body flex flex-col space-y-4" id="simple-voting-form">
-                        <div class="flex flex-col gap-2">
-                            <label for="simple-voting-description">Description</label>
-                            <textarea
-                                    class="textarea textarea-bordered min-h-36 max-h-96"
-                                    id="simple-voting-description"
-                                    name="simple-voting-description"
-                                    placeholder="Enter your description"
-                            ></textarea>
-                        </div>
-                        <button class="btn btn-primary">Create proposal</button>
-                    </form>
-                </div>
-            </div>
+      <div class="w-full flex flex-col items-center gap-10">
+        <div class="tabs tabs-boxed" role="tablist">
+          <a
+            class="template-tab tab tab-active transition-all duration-200"
+            data-card-id="issue-grant-card"
+            role="tab"
+          >
+            Issue grant
+          </a>
+          <a
+            class="template-tab tab transition-all duration-200"
+            data-card-id="additional-mint-card"
+            role="tab"
+          >
+            Additional mint
+          </a>
+          <a
+            class="template-tab tab transition-all duration-200"
+            data-card-id="erc20-grant-card"
+            role="tab"
+          >
+            Pay erc20 grant
+          </a>
+          <a
+            class="template-tab tab transition-all duration-200"
+            data-card-id="nft721-grant-card"
+            role="tab"
+          >
+            Pay NFT721 grant
+          </a>
+          <a
+            class="template-tab tab transition-all duration-200"
+            data-card-id="simple-voting-card"
+            role="tab"
+          >
+            Simple voting
+          </a>
         </div>
 
+        <div>
+          <div
+            class="template-card card w-96 bg-neutral shadow-xl"
+            id="issue-grant-card"
+          >
+            <form
+              class="card-body flex flex-col space-y-4"
+              id="issue-grant-form"
+            >
+              <div class="flex flex-col gap-2">
+                <label for="issue-grant-receiver-wallet"
+                  >Receiver wallet address</label
+                >
+                <input
+                  class="input input-bordered w-full max-w-xs"
+                  id="issue-grant-receiver-wallet"
+                  name="issue-grant-receiver-wallet"
+                  placeholder="Enter wallet address"
+                  required
+                  type="text"
+                />
+              </div>
+              <div class="flex flex-col gap-2">
+                <label for="issue-grant-amount">Amount</label>
+                <input
+                  class="input input-bordered w-full max-w-xs"
+                  id="issue-grant-amount"
+                  name="issue-grant-amount"
+                  placeholder="Enter value"
+                  required
+                  type="text"
+                />
+              </div>
+              <div class="flex flex-col gap-2">
+                <label for="issue-grant-description">Description</label>
+                <textarea
+                  class="textarea textarea-bordered min-h-36 max-h-96"
+                  id="issue-grant-description"
+                  name="issue-grant-description"
+                  placeholder="Enter your description"
+                  required
+                ></textarea>
+              </div>
+              <button class="btn btn-primary">Create proposal</button>
+            </form>
+          </div>
+
+          <div
+            class="template-card w-96 bg-neutral shadow-xl hidden"
+            id="additional-mint-card"
+          >
+            <form
+              class="card-body flex flex-col space-y-4"
+              id="additional-mint-form"
+            >
+              <div class="flex flex-col gap-2">
+                <label for="additional-mint-receiver-wallet"
+                  >Receiver wallet address</label
+                >
+                <input
+                  class="input input-bordered w-full max-w-xs"
+                  id="additional-mint-receiver-wallet"
+                  name="additional-mint-receiver-wallet"
+                  placeholder="Enter wallet address"
+                  required
+                  type="text"
+                />
+              </div>
+              <div class="flex flex-col gap-2">
+                <label for="additional-mint-amount">Amount</label>
+                <input
+                  class="input input-bordered w-full max-w-xs"
+                  id="additional-mint-amount"
+                  name="additional-mint-amount"
+                  placeholder="Enter value"
+                  required
+                  type="text"
+                />
+              </div>
+              <div class="flex flex-col gap-2">
+                <label for="additional-mint-description">Description</label>
+                <textarea
+                  class="textarea textarea-bordered min-h-36 max-h-96"
+                  id="additional-mint-description"
+                  name="additional-mint-description"
+                  placeholder="Enter your description"
+                ></textarea>
+              </div>
+              <button class="btn btn-primary">Create proposal</button>
+            </form>
+          </div>
+
+          <div
+            class="template-card w-96 bg-neutral shadow-xl hidden"
+            id="erc20-grant-card"
+          >
+            <form
+              class="card-body flex flex-col space-y-4"
+              id="erc20-grant-form"
+            >
+              <div class="flex flex-col gap-2">
+                <label for="erc20-grant-receiver-wallet"
+                  >Receiver wallet address</label
+                >
+                <input
+                  class="input input-bordered w-full max-w-xs"
+                  id="erc20-grant-receiver-wallet"
+                  name="erc20-grant-receiver-wallet"
+                  placeholder="Enter wallet address"
+                  required
+                  type="text"
+                />
+              </div>
+              <div class="flex flex-col gap-2">
+                <label for="erc20-grant-amount">Amount</label>
+                <input
+                  class="input input-bordered w-full max-w-xs"
+                  id="erc20-grant-amount"
+                  name="erc20-grant-amount"
+                  placeholder="Enter value"
+                  required
+                  type="text"
+                />
+              </div>
+              <div class="flex flex-col gap-2">
+                <label for="erc20-grant-token-address">Token address</label>
+                <input
+                  class="input input-bordered w-full max-w-xs"
+                  id="erc20-grant-token-address"
+                  name="erc20-grant-token-address"
+                  placeholder="Enter token address"
+                  required
+                  type="text"
+                />
+              </div>
+              <div class="flex flex-col gap-2">
+                <label for="erc20-grant-description">Description</label>
+                <textarea
+                  class="textarea textarea-bordered min-h-36 max-h-96"
+                  id="erc20-grant-description"
+                  name="erc20-grant-description"
+                  placeholder="Enter your description"
+                ></textarea>
+              </div>
+              <button class="btn btn-primary">Create proposal</button>
+            </form>
+          </div>
+
+          <div
+            class="template-card w-96 bg-neutral shadow-xl hidden"
+            id="nft721-grant-card"
+          >
+            <form
+              class="card-body flex flex-col space-y-4"
+              id="nft721-grant-form"
+            >
+              <div class="flex flex-col gap-2">
+                <label for="nft721-grant-receiver-wallet"
+                  >Receiver wallet address</label
+                >
+                <input
+                  class="input input-bordered w-full max-w-xs"
+                  id="nft721-grant-receiver-wallet"
+                  name="nft721-grant-receiver-wallet"
+                  placeholder="Enter wallet address"
+                  required
+                  type="text"
+                />
+              </div>
+              <div class="flex flex-col gap-2">
+                <label for="nft721-grant-id">ID</label>
+                <input
+                  class="input input-bordered w-full max-w-xs"
+                  id="nft721-grant-id"
+                  name="nft721-grant-id"
+                  placeholder="Enter token id"
+                  required
+                  type="text"
+                />
+              </div>
+              <div class="flex flex-col gap-2">
+                <label for="nft721-grant-token-address">Token address</label>
+                <input
+                  class="input input-bordered w-full max-w-xs"
+                  id="nft721-grant-token-address"
+                  name="nft721-grant-token-address"
+                  placeholder="Enter token address"
+                  required
+                  type="text"
+                />
+              </div>
+              <div class="flex flex-col gap-2">
+                <label for="nft721-grant-description">Description</label>
+                <textarea
+                  class="textarea textarea-bordered min-h-36 max-h-96"
+                  id="nft721-grant-description"
+                  name="nft721-grant-description"
+                  placeholder="Enter your description"
+                ></textarea>
+              </div>
+              <button class="btn btn-primary">Create proposal</button>
+            </form>
+          </div>
+
+          <div
+            class="template-card w-96 bg-neutral shadow-xl hidden"
+            id="simple-voting-card"
+          >
+            <form
+              class="card-body flex flex-col space-y-4"
+              id="simple-voting-form"
+            >
+              <div class="flex flex-col gap-2">
+                <label for="simple-voting-description">Description</label>
+                <textarea
+                  class="textarea textarea-bordered min-h-36 max-h-96"
+                  id="simple-voting-description"
+                  name="simple-voting-description"
+                  placeholder="Enter your description"
+                ></textarea>
+              </div>
+              <button class="btn btn-primary">Create proposal</button>
+            </form>
+          </div>
+        </div>
+      </div>
     </section>
     <section class="custom-page mt-10 hidden" id="create">
-        <div class="w-full flex flex-col items-center gap-10">
-            <div class="card w-96 bg-neutral shadow-xl" id="create-proposal-card">
-                <form class="card-body flex flex-col space-y-4" id="create-proposal-form">
-                    <div class="flex flex-col gap-2">
-                        <label for="create-proposal-targets">Targets</label>
-                        <textarea
-                                class="textarea textarea-bordered min-h-24 max-h-64"
-                                id="create-proposal-targets"
-                                name="create-proposal-targets"
-                                placeholder="Enter targets"
-                                required
-                        ></textarea>
-                    </div>
-                    <div class="flex flex-col gap-2">
-                        <label for="create-proposal-values">Values</label>
-                        <textarea
-                                class="textarea textarea-bordered min-h-24 max-h-64"
-                                id="create-proposal-values"
-                                name="create-proposal-values"
-                                placeholder="Enter values"
-                                required
-                        ></textarea>
-                    </div>
-                    <div class="flex flex-col gap-2">
-                        <label for="create-proposal-call-datas">Call datas</label>
-                        <textarea
-                                class="textarea textarea-bordered min-h-24 max-h-64"
-                                id="create-proposal-call-datas"
-                                name="create-proposal-call-datas"
-                                placeholder="Enter call datas"
-                                required
-                        ></textarea>
-                    </div>
-                    <div class="flex flex-col gap-2">
-                        <label for="create-proposal-description">Description</label>
-                        <textarea
-                                class="textarea textarea-bordered min-h-24 max-h-64"
-                                id="create-proposal-description"
-                                name="create-proposal-description"
-                                placeholder="Enter your description"
-                                required
-                        ></textarea>
-                    </div>
-                    <button class="btn btn-primary">
-                        Create proposal
-                    </button>
-                </form>
+      <div class="w-full flex flex-col items-center gap-10">
+        <div class="card w-96 bg-neutral shadow-xl" id="create-proposal-card">
+          <form
+            class="card-body flex flex-col space-y-4"
+            id="create-proposal-form"
+          >
+            <div class="flex flex-col gap-2">
+              <label for="create-proposal-targets">Targets</label>
+              <textarea
+                class="textarea textarea-bordered min-h-24 max-h-64"
+                id="create-proposal-targets"
+                name="create-proposal-targets"
+                placeholder="Enter targets"
+                required
+              ></textarea>
             </div>
+            <div class="flex flex-col gap-2">
+              <label for="create-proposal-values">Values</label>
+              <textarea
+                class="textarea textarea-bordered min-h-24 max-h-64"
+                id="create-proposal-values"
+                name="create-proposal-values"
+                placeholder="Enter values"
+                required
+              ></textarea>
+            </div>
+            <div class="flex flex-col gap-2">
+              <label for="create-proposal-call-datas">Call datas</label>
+              <textarea
+                class="textarea textarea-bordered min-h-24 max-h-64"
+                id="create-proposal-call-datas"
+                name="create-proposal-call-datas"
+                placeholder="Enter call datas"
+                required
+              ></textarea>
+            </div>
+            <div class="flex flex-col gap-2">
+              <label for="create-proposal-description">Description</label>
+              <textarea
+                class="textarea textarea-bordered min-h-24 max-h-64"
+                id="create-proposal-description"
+                name="create-proposal-description"
+                placeholder="Enter your description"
+                required
+              ></textarea>
+            </div>
+            <button class="btn btn-primary">Create proposal</button>
+          </form>
         </div>
+      </div>
     </section>
     <section class="custom-page mt-10 hidden w-full" id="donate">
-        <div class="w-full flex flex-col items-center gap-10">
-            <p class="text-xl text-white my-3 max-w-[800px] text-center">
-                To donate money to us you can simply send ERC20 tokens and native network tokens to the address
-                <span id="treasury-address"></span>
-            </p>
-            <div class="tabs tabs-boxed" role="tablist">
-                <a
-                        class="donate-tab tab tab-active transition-all duration-200"
-                        data-card-id="donate-native-token"
-                        id="donate-native-tab"
-                        role="tab"
-                >
-                    Native
-                </a>
-                <a
-                        class="donate-tab tab transition-all duration-200"
-                        data-card-id="donate-erc20"
-                        id="donate-erc-tab"
-                        role="tab"
-                >
-                    ERC20
-                </a>
-            </div>
-            <div class="donate-card card w-96 bg-neutral shadow-xl" id="donate-native-token">
-                <form class="card-body flex flex-col space-y-4" id="native-token-form">
-                    <div class="flex flex-col gap-2">
-                        <label for="native-token-amount">Amount</label>
-                        <input class="input input-bordered w-full max-w-xs" id="native-token-amount"
-                               name="native-token-amount"
-                               placeholder="Enter value"
-                               required type="text">
-                    </div>
-                    <button class="btn btn-primary">Send transaction</button>
-                </form>
-            </div>
-            <div class="donate-card w-96 bg-neutral shadow-xl hidden" id="donate-erc20">
-                <form class="card-body flex flex-col space-y-4" id="erc20-form">
-                    <div class="flex flex-col gap-2">
-                        <label for="erc20-amount">Amount</label>
-                        <input class="input input-bordered w-full max-w-xs" id="erc20-amount" name="erc20-amount"
-                               placeholder="Enter value"
-                               required type="text">
-                    </div>
-                    <div class="flex flex-col gap-2">
-                        <label for="erc20-token-address">Token address</label>
-                        <input class="input input-bordered w-full max-w-xs" id="erc20-token-address"
-                               name="erc20-token-address"
-                               placeholder="Enter token address"
-                               required type="text">
-                    </div>
-                    <button class="btn btn-primary">Send</button>
-                </form>
-            </div>
+      <div class="w-full flex flex-col items-center gap-10">
+        <p class="text-xl text-white my-3 max-w-[800px] text-center">
+          To donate money to us you can simply send ERC20 tokens and native
+          network tokens to the address
+          <span id="treasury-address"></span>
+        </p>
+        <div class="tabs tabs-boxed" role="tablist">
+          <a
+            class="donate-tab tab tab-active transition-all duration-200"
+            data-card-id="donate-native-token"
+            id="donate-native-tab"
+            role="tab"
+          >
+            Native
+          </a>
+          <a
+            class="donate-tab tab transition-all duration-200"
+            data-card-id="donate-erc20"
+            id="donate-erc-tab"
+            role="tab"
+          >
+            ERC20
+          </a>
         </div>
+        <div
+          class="donate-card card w-96 bg-neutral shadow-xl"
+          id="donate-native-token"
+        >
+          <form
+            class="card-body flex flex-col space-y-4"
+            id="native-token-form"
+          >
+            <div class="flex flex-col gap-2">
+              <label for="native-token-amount">Amount</label>
+              <input
+                class="input input-bordered w-full max-w-xs"
+                id="native-token-amount"
+                name="native-token-amount"
+                placeholder="Enter value"
+                required
+                type="text"
+              />
+            </div>
+            <button class="btn btn-primary">Send transaction</button>
+          </form>
+        </div>
+        <div
+          class="donate-card w-96 bg-neutral shadow-xl hidden"
+          id="donate-erc20"
+        >
+          <form class="card-body flex flex-col space-y-4" id="erc20-form">
+            <div class="flex flex-col gap-2">
+              <label for="erc20-amount">Amount</label>
+              <input
+                class="input input-bordered w-full max-w-xs"
+                id="erc20-amount"
+                name="erc20-amount"
+                placeholder="Enter value"
+                required
+                type="text"
+              />
+            </div>
+            <div class="flex flex-col gap-2">
+              <label for="erc20-token-address">Token address</label>
+              <input
+                class="input input-bordered w-full max-w-xs"
+                id="erc20-token-address"
+                name="erc20-token-address"
+                placeholder="Enter token address"
+                required
+                type="text"
+              />
+            </div>
+            <button class="btn btn-primary">Send</button>
+          </form>
+        </div>
+      </div>
     </section>
-</main>
+  </main>
 
-<script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/toastify-js" type="text/javascript"></script>
-<script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js"
-        type="application/javascript"></script>
+  <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/toastify-js"
+    type="text/javascript"
+  ></script>
+  <script
+    src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js"
+    type="application/javascript"
+  ></script>
 
-<!--utils-->
-<script>
+  <!--utils-->
+  <script>
     const customCallToast = (msg) => {
-        Toastify({
-            text: msg,
-            position: "center",
-            gravity: "top",
-        }).showToast();
-    }
+      Toastify({
+        text: msg,
+        position: "center",
+        gravity: "top",
+      }).showToast();
+    };
 
     function shortenAddress(address) {
-        if (address.length < 10) return address; // Если адрес слишком короткий, возвращаем его как есть
-        return address.slice(0, 6) + "..." + address.slice(-5); // Возвращаем сокращенный адрес
+      if (address.length < 10) return address; // Если адрес слишком короткий, возвращаем его как есть
+      return address.slice(0, 6) + "..." + address.slice(-5); // Возвращаем сокращенный адрес
     }
-</script>
+  </script>
 
-<!--MAIN ROUTER-->
-<script>
-    document.querySelectorAll('.custom-link').forEach(link => {
-        link.addEventListener('click', () => {
-            const pageId = link.getAttribute('data-page');
+  <!--MAIN ROUTER-->
+  <script>
+    document.querySelectorAll(".custom-link").forEach((link) => {
+      link.addEventListener("click", () => {
+        const pageId = link.getAttribute("data-page");
 
-            document.querySelectorAll('.custom-page').forEach(section => {
-                if (section.id === pageId) {
-                    section.classList.remove('hidden');
-                    section.classList.add('block');
-                } else {
-                    section.classList.remove('block');
-                    section.classList.add('hidden');
-                }
-            });
+        document.querySelectorAll(".custom-page").forEach((section) => {
+          if (section.id === pageId) {
+            section.classList.remove("hidden");
+            section.classList.add("block");
+          } else {
+            section.classList.remove("block");
+            section.classList.add("hidden");
+          }
         });
+      });
     });
-</script>
+  </script>
 
-<!--loading animation-->
-<script>
-    const loader = document.getElementById('loader');
-    const content = document.getElementById('content');
+  <!--loading animation-->
+  <script>
+    const loader = document.getElementById("loader");
+    const content = document.getElementById("content");
 
-    var typed = new Typed('#init-text', {
-        strings: ['Initializing app...', 'Get contract info...'],
-        typeSpeed: 30,
-        backSpeed: 0,
+    var typed = new Typed("#init-text", {
+      strings: ["Initializing app...", "Get contract info..."],
+      typeSpeed: 30,
+      backSpeed: 0,
     });
 
     setTimeout(() => {
-        loader.classList.remove('flex')
-        loader.classList.add('hidden')
+      loader.classList.remove("flex");
+      loader.classList.add("hidden");
 
-        content.classList.remove('hidden')
-    }, 3000)
-</script>
+      content.classList.remove("hidden");
+    }, 3000);
+  </script>
 
-<!--initializing app in ethers-->
-<script>
+  <!--initializing app in ethers-->
+  <script>
     const superAbi = [
-        "constructor(uint256 _minDelay, string _nameToken, string _symbolToken, string _nameDAO, uint48 _votingDelay, uint32 _votingPeriod, uint256 _quorumValue) payable",
-        "function governor() view returns (address)",
-        "function myAddr() view returns (address)",
-        "function timeLock() view returns (address)",
-        "function token() view returns (address)",
-        "function treasury() view returns (address)"
-    ]
+      "constructor(uint256 _minDelay, string _nameToken, string _symbolToken, string _nameDAO, uint48 _votingDelay, uint32 _votingPeriod, uint256 _quorumValue) payable",
+      "function governor() view returns (address)",
+      "function myAddr() view returns (address)",
+      "function timeLock() view returns (address)",
+      "function token() view returns (address)",
+      "function treasury() view returns (address)",
+    ];
     const miniAbi = [
-        "constructor(address _token, address _timelock, string _name, uint48 _votingDelay, uint32 _votingPeriod, uint256 _quorumValue)",
-        "error CheckpointUnorderedInsertion()",
-        "error FailedInnerCall()",
-        "error GovernorAlreadyCastVote(address voter)",
-        "error GovernorAlreadyQueuedProposal(uint256 proposalId)",
-        "error GovernorDisabledDeposit()",
-        "error GovernorInsufficientProposerVotes(address proposer, uint256 votes, uint256 threshold)",
-        "error GovernorInvalidProposalLength(uint256 targets, uint256 calldatas, uint256 values)",
-        "error GovernorInvalidQuorumFraction(uint256 quorumNumerator, uint256 quorumDenominator)",
-        "error GovernorInvalidSignature(address voter)",
-        "error GovernorInvalidVoteType()",
-        "error GovernorInvalidVotingPeriod(uint256 votingPeriod)",
-        "error GovernorNonexistentProposal(uint256 proposalId)",
-        "error GovernorNotQueuedProposal(uint256 proposalId)",
-        "error GovernorOnlyExecutor(address account)",
-        "error GovernorOnlyProposer(address account)",
-        "error GovernorQueueNotImplemented()",
-        "error GovernorRestrictedProposer(address proposer)",
-        "error GovernorUnexpectedProposalState(uint256 proposalId, uint8 current, bytes32 expectedStates)",
-        "error InvalidAccountNonce(address account, uint256 currentNonce)",
-        "error InvalidShortString()",
-        "error QueueEmpty()",
-        "error QueueFull()",
-        "error SafeCastOverflowedUintDowncast(uint8 bits, uint256 value)",
-        "error StringTooLong(string str)",
-        "event EIP712DomainChanged()",
-        "event ProposalCanceled(uint256 proposalId)",
-        "event ProposalCreated(uint256 proposalId, address proposer, address[] targets, uint256[] values, string[] signatures, bytes[] calldatas, uint256 voteStart, uint256 voteEnd, string description)",
-        "event ProposalExecuted(uint256 proposalId)",
-        "event ProposalQueued(uint256 proposalId, uint256 etaSeconds)",
-        "event ProposalThresholdSet(uint256 oldProposalThreshold, uint256 newProposalThreshold)",
-        "event QuorumNumeratorUpdated(uint256 oldQuorumNumerator, uint256 newQuorumNumerator)",
-        "event TimelockChange(address oldTimelock, address newTimelock)",
-        "event VoteCast(address indexed voter, uint256 proposalId, uint8 support, uint256 weight, string reason)",
-        "event VoteCastWithParams(address indexed voter, uint256 proposalId, uint8 support, uint256 weight, string reason, bytes params)",
-        "event VotingDelaySet(uint256 oldVotingDelay, uint256 newVotingDelay)",
-        "event VotingPeriodSet(uint256 oldVotingPeriod, uint256 newVotingPeriod)",
-        "function BALLOT_TYPEHASH() view returns (bytes32)",
-        "function CLOCK_MODE() view returns (string)",
-        "function COUNTING_MODE() pure returns (string)",
-        "function EXTENDED_BALLOT_TYPEHASH() view returns (bytes32)",
-        "function cancel(address[] targets, uint256[] values, bytes[] calldatas, bytes32 descriptionHash) returns (uint256)",
-        "function castVote(uint256 proposalId, uint8 support) returns (uint256)",
-        "function castVoteBySig(uint256 proposalId, uint8 support, address voter, bytes signature) returns (uint256)",
-        "function castVoteWithReason(uint256 proposalId, uint8 support, string reason) returns (uint256)",
-        "function castVoteWithReasonAndParams(uint256 proposalId, uint8 support, string reason, bytes params) returns (uint256)",
-        "function castVoteWithReasonAndParamsBySig(uint256 proposalId, uint8 support, address voter, string reason, bytes params, bytes signature) returns (uint256)",
-        "function clock() view returns (uint48)",
-        "function eip712Domain() view returns (bytes1 fields, string name, string version, uint256 chainId, address verifyingContract, bytes32 salt, uint256[] extensions)",
-        "function execute(address[] targets, uint256[] values, bytes[] calldatas, bytes32 descriptionHash) payable returns (uint256)",
-        "function getVotes(address account, uint256 timepoint) view returns (uint256)",
-        "function getVotesWithParams(address account, uint256 timepoint, bytes params) view returns (uint256)",
-        "function hasVoted(uint256 proposalId, address account) view returns (bool)",
-        "function hashProposal(address[] targets, uint256[] values, bytes[] calldatas, bytes32 descriptionHash) pure returns (uint256)",
-        "function name() view returns (string)",
-        "function nonces(address owner) view returns (uint256)",
-        "function onERC1155BatchReceived(address, address, uint256[], uint256[], bytes) returns (bytes4)",
-        "function onERC1155Received(address, address, uint256, uint256, bytes) returns (bytes4)",
-        "function onERC721Received(address, address, uint256, bytes) returns (bytes4)",
-        "function proposalDeadline(uint256 proposalId) view returns (uint256)",
-        "function proposalEta(uint256 proposalId) view returns (uint256)",
-        "function proposalNeedsQueuing(uint256 proposalId) view returns (bool)",
-        "function proposalProposer(uint256 proposalId) view returns (address)",
-        "function proposalSnapshot(uint256 proposalId) view returns (uint256)",
-        "function proposalThreshold() view returns (uint256)",
-        "function proposalVotes(uint256 proposalId) view returns (uint256 againstVotes, uint256 forVotes, uint256 abstainVotes)",
-        "function propose(address[] targets, uint256[] values, bytes[] calldatas, string description) returns (uint256)",
-        "function queue(address[] targets, uint256[] values, bytes[] calldatas, bytes32 descriptionHash) returns (uint256)",
-        "function quorum(uint256 blockNumber) view returns (uint256)",
-        "function quorumDenominator() view returns (uint256)",
-        "function quorumNumerator(uint256 timepoint) view returns (uint256)",
-        "function quorumNumerator() view returns (uint256)",
-        "function relay(address target, uint256 value, bytes data) payable",
-        "function setProposalThreshold(uint256 newProposalThreshold)",
-        "function setVotingDelay(uint48 newVotingDelay)",
-        "function setVotingPeriod(uint32 newVotingPeriod)",
-        "function state(uint256 proposalId) view returns (uint8)",
-        "function supportsInterface(bytes4 interfaceId) view returns (bool)",
-        "function timelock() view returns (address)",
-        "function token() view returns (address)",
-        "function updateQuorumNumerator(uint256 newQuorumNumerator)",
-        "function updateTimelock(address newTimelock)",
-        "function version() view returns (string)",
-        "function votingDelay() view returns (uint256)",
-        "function votingPeriod() view returns (uint256)"
-    ]
+      "constructor(address _token, address _timelock, string _name, uint48 _votingDelay, uint32 _votingPeriod, uint256 _quorumValue)",
+      "event EIP712DomainChanged()",
+      "event ProposalCanceled(uint256 proposalId)",
+      "event ProposalCreated(uint256 proposalId, address proposer, address[] targets, uint256[] values, string[] signatures, bytes[] calldatas, uint256 voteStart, uint256 voteEnd, string description)",
+      "event ProposalExecuted(uint256 proposalId)",
+      "event ProposalQueued(uint256 proposalId, uint256 etaSeconds)",
+      "event ProposalThresholdSet(uint256 oldProposalThreshold, uint256 newProposalThreshold)",
+      "event QuorumNumeratorUpdated(uint256 oldQuorumNumerator, uint256 newQuorumNumerator)",
+      "event TimelockChange(address oldTimelock, address newTimelock)",
+      "event VoteCast(address indexed voter, uint256 proposalId, uint8 support, uint256 weight, string reason)",
+      "event VoteCastWithParams(address indexed voter, uint256 proposalId, uint8 support, uint256 weight, string reason, bytes params)",
+      "event VotingDelaySet(uint256 oldVotingDelay, uint256 newVotingDelay)",
+      "event VotingPeriodSet(uint256 oldVotingPeriod, uint256 newVotingPeriod)",
+      "function BALLOT_TYPEHASH() view returns (bytes32)",
+      "function CLOCK_MODE() view returns (string)",
+      "function COUNTING_MODE() pure returns (string)",
+      "function EXTENDED_BALLOT_TYPEHASH() view returns (bytes32)",
+      "function cancel(address[] targets, uint256[] values, bytes[] calldatas, bytes32 descriptionHash) returns (uint256)",
+      "function castVote(uint256 proposalId, uint8 support) returns (uint256)",
+      "function castVoteBySig(uint256 proposalId, uint8 support, address voter, bytes signature) returns (uint256)",
+      "function castVoteWithReason(uint256 proposalId, uint8 support, string reason) returns (uint256)",
+      "function castVoteWithReasonAndParams(uint256 proposalId, uint8 support, string reason, bytes params) returns (uint256)",
+      "function castVoteWithReasonAndParamsBySig(uint256 proposalId, uint8 support, address voter, string reason, bytes params, bytes signature) returns (uint256)",
+      "function clock() view returns (uint48)",
+      "function eip712Domain() view returns (bytes1 fields, string name, string version, uint256 chainId, address verifyingContract, bytes32 salt, uint256[] extensions)",
+      "function execute(address[] targets, uint256[] values, bytes[] calldatas, bytes32 descriptionHash) payable returns (uint256)",
+      "function getVotes(address account, uint256 timepoint) view returns (uint256)",
+      "function getVotesWithParams(address account, uint256 timepoint, bytes params) view returns (uint256)",
+      "function hasVoted(uint256 proposalId, address account) view returns (bool)",
+      "function hashProposal(address[] targets, uint256[] values, bytes[] calldatas, bytes32 descriptionHash) pure returns (uint256)",
+      "function name() view returns (string)",
+      "function nonces(address owner) view returns (uint256)",
+      "function onERC1155BatchReceived(address, address, uint256[], uint256[], bytes) returns (bytes4)",
+      "function onERC1155Received(address, address, uint256, uint256, bytes) returns (bytes4)",
+      "function onERC721Received(address, address, uint256, bytes) returns (bytes4)",
+      "function proposalDeadline(uint256 proposalId) view returns (uint256)",
+      "function proposalEta(uint256 proposalId) view returns (uint256)",
+      "function proposalNeedsQueuing(uint256 proposalId) view returns (bool)",
+      "function proposalProposer(uint256 proposalId) view returns (address)",
+      "function proposalSnapshot(uint256 proposalId) view returns (uint256)",
+      "function proposalThreshold() view returns (uint256)",
+      "function proposalVotes(uint256 proposalId) view returns (uint256 againstVotes, uint256 forVotes, uint256 abstainVotes)",
+      "function propose(address[] targets, uint256[] values, bytes[] calldatas, string description) returns (uint256)",
+      "function queue(address[] targets, uint256[] values, bytes[] calldatas, bytes32 descriptionHash) returns (uint256)",
+      "function quorum(uint256 blockNumber) view returns (uint256)",
+      "function quorumDenominator() view returns (uint256)",
+      "function quorumNumerator(uint256 timepoint) view returns (uint256)",
+      "function quorumNumerator() view returns (uint256)",
+      "function relay(address target, uint256 value, bytes data) payable",
+      "function setProposalThreshold(uint256 newProposalThreshold)",
+      "function setVotingDelay(uint48 newVotingDelay)",
+      "function setVotingPeriod(uint32 newVotingPeriod)",
+      "function state(uint256 proposalId) view returns (uint8)",
+      "function supportsInterface(bytes4 interfaceId) view returns (bool)",
+      "function timelock() view returns (address)",
+      "function token() view returns (address)",
+      "function updateQuorumNumerator(uint256 newQuorumNumerator)",
+      "function updateTimelock(address newTimelock)",
+      "function version() view returns (string)",
+      "function votingDelay() view returns (uint256)",
+      "function votingPeriod() view returns (uint256)",
+    ];
     const tokenAbi = [
-        "constructor(address _timelock, string _name, string _symbol)",
-        "error CheckpointUnorderedInsertion()",
-        "error ECDSAInvalidSignature()",
-        "error ECDSAInvalidSignatureLength(uint256 length)",
-        "error ECDSAInvalidSignatureS(bytes32 s)",
-        "error ERC20ExceededSafeSupply(uint256 increasedSupply, uint256 cap)",
-        "error ERC20InsufficientAllowance(address spender, uint256 allowance, uint256 needed)",
-        "error ERC20InsufficientBalance(address sender, uint256 balance, uint256 needed)",
-        "error ERC20InvalidApprover(address approver)",
-        "error ERC20InvalidReceiver(address receiver)",
-        "error ERC20InvalidSender(address sender)",
-        "error ERC20InvalidSpender(address spender)",
-        "error ERC2612ExpiredSignature(uint256 deadline)",
-        "error ERC2612InvalidSigner(address signer, address owner)",
-        "error ERC5805FutureLookup(uint256 timepoint, uint48 clock)",
-        "error ERC6372InconsistentClock()",
-        "error InvalidAccountNonce(address account, uint256 currentNonce)",
-        "error InvalidShortString()",
-        "error SafeCastOverflowedUintDowncast(uint8 bits, uint256 value)",
-        "error StringTooLong(string str)",
-        "error VotesExpiredSignature(uint256 expiry)",
-        "event Approval(address indexed owner, address indexed spender, uint256 value)",
-        "event DelegateChanged(address indexed delegator, address indexed fromDelegate, address indexed toDelegate)",
-        "event DelegateVotesChanged(address indexed delegate, uint256 previousVotes, uint256 newVotes)",
-        "event EIP712DomainChanged()",
-        "event Transfer(address indexed from, address indexed to, uint256 value)",
-        "function CLOCK_MODE() view returns (string)",
-        "function DOMAIN_SEPARATOR() view returns (bytes32)",
-        "function allowance(address owner, address spender) view returns (uint256)",
-        "function approve(address spender, uint256 value) returns (bool)",
-        "function balanceOf(address account) view returns (uint256)",
-        "function checkpoints(address account, uint32 pos) view returns (tuple(uint48 _key, uint208 _value))",
-        "function clock() view returns (uint48)",
-        "function decimals() view returns (uint8)",
-        "function delegate(address delegatee)",
-        "function delegateBySig(address delegatee, uint256 nonce, uint256 expiry, uint8 v, bytes32 r, bytes32 s)",
-        "function delegates(address account) view returns (address)",
-        "function eip712Domain() view returns (bytes1 fields, string name, string version, uint256 chainId, address verifyingContract, bytes32 salt, uint256[] extensions)",
-        "function getPastTotalSupply(uint256 timepoint) view returns (uint256)",
-        "function getPastVotes(address account, uint256 timepoint) view returns (uint256)",
-        "function getVotes(address account) view returns (uint256)",
-        "function mint(address to, uint256 amount)",
-        "function mintBatch(address[] to, uint256[] amount)",
-        "function name() view returns (string)",
-        "function nonces(address _owner) view returns (uint256)",
-        "function numCheckpoints(address account) view returns (uint32)",
-        "function owner() view returns (address)",
-        "function permit(address owner, address spender, uint256 value, uint256 deadline, uint8 v, bytes32 r, bytes32 s)",
-        "function symbol() view returns (string)",
-        "function tokenDistribution(address[] to, uint256[] amount)",
-        "function totalSupply() view returns (uint256)",
-        "function transfer(address to, uint256 value) returns (bool)",
-        "function transferFrom(address from, address to, uint256 value) returns (bool)"
-    ]
+      "constructor(address _timelock, string _name, string _symbol)",
+      "event Approval(address indexed owner, address indexed spender, uint256 value)",
+      "event DelegateChanged(address indexed delegator, address indexed fromDelegate, address indexed toDelegate)",
+      "event DelegateVotesChanged(address indexed delegate, uint256 previousVotes, uint256 newVotes)",
+      "event EIP712DomainChanged()",
+      "event Transfer(address indexed from, address indexed to, uint256 value)",
+      "function CLOCK_MODE() view returns (string)",
+      "function DOMAIN_SEPARATOR() view returns (bytes32)",
+      "function allowance(address owner, address spender) view returns (uint256)",
+      "function approve(address spender, uint256 value) returns (bool)",
+      "function balanceOf(address account) view returns (uint256)",
+      "function checkpoints(address account, uint32 pos) view returns (tuple(uint48 _key, uint208 _value))",
+      "function clock() view returns (uint48)",
+      "function decimals() view returns (uint8)",
+      "function delegate(address delegatee)",
+      "function delegateBySig(address delegatee, uint256 nonce, uint256 expiry, uint8 v, bytes32 r, bytes32 s)",
+      "function delegates(address account) view returns (address)",
+      "function eip712Domain() view returns (bytes1 fields, string name, string version, uint256 chainId, address verifyingContract, bytes32 salt, uint256[] extensions)",
+      "function getPastTotalSupply(uint256 timepoint) view returns (uint256)",
+      "function getPastVotes(address account, uint256 timepoint) view returns (uint256)",
+      "function getVotes(address account) view returns (uint256)",
+      "function mint(address to, uint256 amount)",
+      "function mintBatch(address[] to, uint256[] amount)",
+      "function name() view returns (string)",
+      "function nonces(address _owner) view returns (uint256)",
+      "function numCheckpoints(address account) view returns (uint32)",
+      "function owner() view returns (address)",
+      "function permit(address owner, address spender, uint256 value, uint256 deadline, uint8 v, bytes32 r, bytes32 s)",
+      "function symbol() view returns (string)",
+      "function tokenDistribution(address[] to, uint256[] amount)",
+      "function totalSupply() view returns (uint256)",
+      "function transfer(address to, uint256 value) returns (bool)",
+      "function transferFrom(address from, address to, uint256 value) returns (bool)",
+    ];
     const treasuryAbi = [
-        "constructor(address _timelock) payable",
-        "function onERC721Received(address, address, uint256, bytes) returns (bytes4)",
-        "function owner() view returns (address)",
-        "function releaseERC20Token(address to, uint256 amount, address token)",
-        "function releaseERC721Token(address to, uint256 id, address token)",
-        "function releaseNativeToken(address to, uint256 amount)"
-    ]
+      "constructor(address _timelock) payable",
+      "function onERC721Received(address, address, uint256, bytes) returns (bytes4)",
+      "function owner() view returns (address)",
+      "function releaseERC20Token(address to, uint256 amount, address token)",
+      "function releaseERC721Token(address to, uint256 id, address token)",
+      "function releaseNativeToken(address to, uint256 amount)",
+    ];
 
-    const contractAddress = '0x5FbDB2315678afecb367f032d93F642f64180aa3'
-    const privateKey = '0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80'
+    // const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
+    // const privateKey =
+    //   "0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80";
+
+    let contractAddress;
+    const getAddress = async () => {
+      contractAddress = document.getElementById("future_address").innerHTML;
+    };
+
     let miniAddress, tokenAddress, treasuryAddress;
-    let provider, wallet, contract, miniContract, tokenContract, treasuryContract;
+    let provider,
+      wallet,
+      contract,
+      miniContract,
+      tokenContract,
+      treasuryContract;
 
     async function connectToContract() {
-        provider = new ethers.providers.JsonRpcProvider();
-        wallet = new ethers.Wallet(privateKey, provider);
-        console.log((await wallet.getBalance(treasuryAddress)).toString())
-        contract = new ethers.Contract(contractAddress, superAbi, wallet);
+      //   provider = new ethers.providers.JsonRpcProvider();
+      //   wallet = new ethers.Wallet(privateKey, provider);
+      //   console.log((await wallet.getBalance(treasuryAddress)).toString());
+      //   contract = new ethers.Contract(contractAddress, superAbi, wallet);
 
-        miniAddress = await contract.governor();
-        tokenAddress = await contract.token();
-        treasuryAddress = await contract.treasury();
-        document.getElementById('treasury-address').innerHTML = treasuryAddress
+      provider = new ethers.providers.Web3Provider(this.parent.ethereum);
+      wallet = await provider.getSigner();
+      contract = new ethers.Contract(contractAddress, superAbi, wallet);
 
-        miniContract = new ethers.Contract(miniAddress, miniAbi, wallet)
-        tokenContract = new ethers.Contract(tokenAddress, tokenAbi, wallet)
-        treasuryContract = new ethers.Contract(treasuryAddress, treasuryAbi, wallet)
+      miniAddress = await contract.governor();
+      tokenAddress = await contract.token();
+      treasuryAddress = await contract.treasury();
+      document.getElementById("treasury-address").innerHTML = treasuryAddress;
 
-        console.log(await tokenContract.balanceOf(wallet.address))
+      miniContract = new ethers.Contract(miniAddress, miniAbi, wallet);
+      tokenContract = new ethers.Contract(tokenAddress, tokenAbi, wallet);
+      treasuryContract = new ethers.Contract(
+        treasuryAddress,
+        treasuryAbi,
+        wallet
+      );
+
+      console.log(contractAddress);
+      console.log(wallet.address);
     }
-</script>
+  </script>
 
-<!--render votings-->
-<script>
-
+  <!--render votings-->
+  <script>
     const posts = [];
 
     const cancelPost = async (targets, values, calldatas, description) => {
-        const descriptionHash = ethers.utils.keccak256(
-            ethers.utils.toUtf8Bytes(description)
+      const descriptionHash = ethers.utils.keccak256(
+        ethers.utils.toUtf8Bytes(description)
+      );
+      try {
+        await miniContract.cancel(
+          [targets],
+          [values],
+          [calldatas],
+          descriptionHash
         );
-        try {
-            await miniContract.cancel([targets], [values], [calldatas], descriptionHash)
-            customCallToast('Success cancel post!')
-            getPosts()
-        } catch (e) {
-            console.log(e)
-            customCallToast('Error cancel post!')
-        }
-    }
+        customCallToast("Success cancel post!");
+        getPosts();
+      } catch (e) {
+        console.log(e);
+        customCallToast("Error cancel post!");
+      }
+    };
 
     const vote = async (proposalId, voteId) => {
-        try {
-            await tokenContract.delegate(wallet.address)
-            await miniContract.castVote(proposalId, voteId)
-            customCallToast('Success voting!')
-        } catch (e) {
-            console.log(e)
-            customCallToast('Error voting!')
-        }
-    }
+      try {
+        await tokenContract.delegate(wallet.address);
+        await miniContract.castVote(proposalId, voteId);
+        customCallToast("Success voting!");
+      } catch (e) {
+        console.log(e);
+        customCallToast("Error voting!");
+      }
+    };
 
     const renderPosts = async () => {
-        posts.reverse()
-        const postFeed = document.getElementById('post-feed')
-        postFeed.innerHTML = ''
+      posts.reverse();
+      const postFeed = document.getElementById("post-feed");
+      postFeed.innerHTML = "";
 
-        for (const item in posts) {
-            const post = posts[item]
-            const block = await provider.getBlock(item.voteStart)
-            const date = new Date(block.timestamp * 1000);
+      for (const item in posts) {
+        const post = posts[item];
+        const block = await provider.getBlock(item.voteStart);
+        const date = new Date(block.timestamp * 1000);
 
-            const day = date.getDate();
-            const month = date.getMonth() + 1;
-            const year = date.getFullYear();
+        const day = date.getDate();
+        const month = date.getMonth() + 1;
+        const year = date.getFullYear();
 
-            const formattedDate = `${day < 10 ? '0' : ''}${day}.${month < 10 ? '0' : ''}${month}.${year}`;
+        const formattedDate = `${day < 10 ? "0" : ""}${day}.${
+          month < 10 ? "0" : ""
+        }${month}.${year}`;
 
-            const renderStatus = (status) => {
-                switch (status) {
-                    case 0:
-                        return '<p class="text-blue-500">Status: Pending</p>'
-                    case 1:
-                        return '<p class="text-green-500">Status: Active</p>'
-                    case 2:
-                        return '<p class="text-red-500">Status: Canceled</p>'
-                    case 3:
-                        return '<p class="text-red-800">Status: Defeated</p>'
-                    case 4:
-                        return '<p class="text-green-800">Status: Succeeded</p>'
-                    case 5:
-                        return '<p class="text-yellow-500">Status: Queued</p>'
-                    case 6:
-                        return '<p class="text-yellow-800">Status: Expired</p>'
-                    case 7:
-                        return '<p class="text-blue-800">Status: Executed</p>'
-                }
-            }
+        const renderStatus = (status) => {
+          switch (status) {
+            case 0:
+              return '<p class="text-blue-500">Status: Pending</p>';
+            case 1:
+              return '<p class="text-green-500">Status: Active</p>';
+            case 2:
+              return '<p class="text-red-500">Status: Canceled</p>';
+            case 3:
+              return '<p class="text-red-800">Status: Defeated</p>';
+            case 4:
+              return '<p class="text-green-800">Status: Succeeded</p>';
+            case 5:
+              return '<p class="text-yellow-500">Status: Queued</p>';
+            case 6:
+              return '<p class="text-yellow-800">Status: Expired</p>';
+            case 7:
+              return '<p class="text-blue-800">Status: Executed</p>';
+          }
+        };
 
-            const status_id = await miniContract.state(post.proposalId)
+        const status_id = await miniContract.state(post.proposalId);
 
-            const votes = await miniContract.proposalVotes(post.proposalId)
-            const decimals = await tokenContract.decimals()
-            const countUp = (votes[1] / 10**decimals).toString();
-            const countNeutral = (votes[2] / 10**decimals).toString();
-            const countDown = (votes[0] / 10**decimals).toString();
+        const votes = await miniContract.proposalVotes(post.proposalId);
+        const decimals = await tokenContract.decimals();
+        const countUp = (votes[1] / 10 ** decimals).toString();
+        const countNeutral = (votes[2] / 10 ** decimals).toString();
+        const countDown = (votes[0] / 10 ** decimals).toString();
 
-            postFeed.innerHTML += (`
+        postFeed.innerHTML += `
             <div class="flex flex-col gap-4">
             <div class="flex items-center justify-between">
                 <ul class="flex flex-col gap-2">
-                    <li class="text-xl text-white">${shortenAddress(post.proposer)}</li>
-                    <li class="text-sm">${formattedDate} - vote end in: ${post.voteEnd} block</li>
+                    <li class="text-xl text-white">${shortenAddress(
+                      post.proposer
+                    )}</li>
+                    <li class="text-sm">${formattedDate} - vote end in: ${
+          post.voteEnd
+        } block</li>
                     <li>${renderStatus(status_id)}</li>
                 </ul>
-                ${post.proposer === wallet.address ? `<button onclick="cancelPost('${post.targets}', '${post[3]}', '${post.calldatas}', '${post.description}')" class='btn btn-sm btn-error'>Cancel</button>` : ''}
+                ${
+                  post.proposer === wallet.address
+                    ? `<button onclick="cancelPost('${post.targets}', '${post[3]}', '${post.calldatas}', '${post.description}')" class='btn btn-sm btn-error'>Cancel</button>`
+                    : ""
+                }
             </div>
 
             <p class="line-clamp-6">
@@ -677,9 +881,15 @@
 
             <div class="flex items-center justify-between mt-2">
                 <div class="flex items-center gap-4">
-                    <button onclick="vote('${post.proposalId}', 1)" class="btn btn-success">👍</button>
-                    <button onclick="vote('${post.proposalId}', 2)" class="btn btn-neutral">🙅</button>
-                    <button onclick="vote('${post.proposalId}', 0)" class="btn btn-error">👎</button>
+                    <button onclick="vote('${
+                      post.proposalId
+                    }', 1)" class="btn btn-success">👍</button>
+                    <button onclick="vote('${
+                      post.proposalId
+                    }', 2)" class="btn btn-neutral">🙅</button>
+                    <button onclick="vote('${
+                      post.proposalId
+                    }', 0)" class="btn btn-error">👎</button>
                 </div>
                 <div class="flex items-center gap-4">
                     <button class="btn btn-ghost text-red-500">${countDown}</button>
@@ -689,235 +899,283 @@
             </div>
         </div>
         <div class="divider"></div>
-            `)
-        }
-    }
+            `;
+      }
+    };
 
     const getPosts = async () => {
-        const data = await miniContract.queryFilter('ProposalCreated')
-        data.forEach(item => {
-            posts.push(item.args)
-        })
-        renderPosts()
-    }
+      const data = await miniContract.queryFilter("ProposalCreated");
+      data.forEach((item) => {
+        posts.push(item.args);
+      });
+      renderPosts();
+    };
 
-    connectToContract().then(() => {
-        getPosts()
-    })
-</script>
+    setTimeout(async () => {
+      try {
+        await getAddress();
+        await connectToContract();
+        await getPosts();
+      } catch (error) {
+        console.error("Произошла ошибка:", error);
+      }
+    }, 4000);
+  </script>
 
-<!--TABS IN TEMPLATE ROUTER-->
-<script>
-    const templateTabs = document.querySelectorAll('.template-tab')
-    const templateCards = document.querySelectorAll('.template-card')
+  <!--TABS IN TEMPLATE ROUTER-->
+  <script>
+    const templateTabs = document.querySelectorAll(".template-tab");
+    const templateCards = document.querySelectorAll(".template-card");
 
-    templateTabs.forEach(tab => {
-        tab.addEventListener('click', function () {
-            const cardId = tab.getAttribute('data-card-id')
+    templateTabs.forEach((tab) => {
+      tab.addEventListener("click", function () {
+        const cardId = tab.getAttribute("data-card-id");
 
-            templateTabs.forEach((tab) => tab.classList.remove("tab-active"));
-            // Add 'tab-active' class to the clicked tab
-            tab.classList.add("tab-active");
+        templateTabs.forEach((tab) => tab.classList.remove("tab-active"));
+        // Add 'tab-active' class to the clicked tab
+        tab.classList.add("tab-active");
 
-            templateCards.forEach(card => {
-                if (card.id === cardId) {
-                    card.classList.remove('hidden')
-                    card.classList.add('card')
-                } else {
-                    card.classList.add('hidden')
-                    card.classList.remove('card')
-                }
-            })
-        })
-    })
-</script>
-<!--processing templates-->
-<script>
-    const issueGrantForm = document.getElementById('issue-grant-form')
-    issueGrantForm.addEventListener('submit', async (event) => {
-        event.preventDefault()
-        const formData = new FormData(issueGrantForm)
-        const receiver_wallet = formData.get('issue-grant-receiver-wallet')
-        const amount = formData.get('issue-grant-amount')
-        const description = formData.get('issue-grant-description')
+        templateCards.forEach((card) => {
+          if (card.id === cardId) {
+            card.classList.remove("hidden");
+            card.classList.add("card");
+          } else {
+            card.classList.add("hidden");
+            card.classList.remove("card");
+          }
+        });
+      });
+    });
+  </script>
+  <!--processing templates-->
+  <script>
+    const issueGrantForm = document.getElementById("issue-grant-form");
+    issueGrantForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const formData = new FormData(issueGrantForm);
+      const receiver_wallet = formData.get("issue-grant-receiver-wallet");
+      const amount = formData.get("issue-grant-amount");
+      const description = formData.get("issue-grant-description");
 
-        try {
-            const calldata = (
-                await treasuryContract.populateTransaction.releaseNativeToken(receiver_wallet, amount)
-            ).data;
-            await miniContract.propose([treasuryAddress], [0], [calldata], description)
-            customCallToast('Success issue a grant!')
-            issueGrantForm.reset()
-        } catch (error) {
-            console.log(error)
-            customCallToast('Error issue a grant!')
-        }
-    })
+      try {
+        const calldata = (
+          await treasuryContract.populateTransaction.releaseNativeToken(
+            receiver_wallet,
+            amount
+          )
+        ).data;
+        await miniContract.propose(
+          [treasuryAddress],
+          [0],
+          [calldata],
+          description
+        );
+        customCallToast("Success issue a grant!");
+        issueGrantForm.reset();
+      } catch (error) {
+        console.log(error);
+        customCallToast("Error issue a grant!");
+      }
+    });
 
-    const additionalMintForm = document.getElementById('additional-mint-form')
-    additionalMintForm.addEventListener('submit', async (event) => {
-        event.preventDefault()
-        const formData = new FormData(additionalMintForm)
-        const receiver_wallet = formData.get('additional-mint-receiver-wallet')
-        const amount = formData.get('additional-mint-amount')
-        const description = formData.get('additional-mint-description')
+    const additionalMintForm = document.getElementById("additional-mint-form");
+    additionalMintForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const formData = new FormData(additionalMintForm);
+      const receiver_wallet = formData.get("additional-mint-receiver-wallet");
+      const amount = formData.get("additional-mint-amount");
+      const description = formData.get("additional-mint-description");
 
-        try {
-            const calldata = (
-                await tokenContract.populateTransaction.mint(receiver_wallet, amount)
-            ).data;
-            await miniContract.propose([tokenAddress], [0], [calldata], description)
-            customCallToast('Success issue a grant!')
-            additionalMintForm.reset()
-        } catch (error) {
-            console.log(error)
-            customCallToast('Error issue a grant!')
-        }
-    })
+      try {
+        const calldata = (
+          await tokenContract.populateTransaction.mint(receiver_wallet, amount)
+        ).data;
+        await miniContract.propose(
+          [tokenAddress],
+          [0],
+          [calldata],
+          description
+        );
+        customCallToast("Success issue a grant!");
+        additionalMintForm.reset();
+      } catch (error) {
+        console.log(error);
+        customCallToast("Error issue a grant!");
+      }
+    });
 
-    const simpleVotingForm = document.getElementById('simple-voting-form')
-    simpleVotingForm.addEventListener('submit', async (event) => {
-        event.preventDefault();
-        const formData = new FormData(simpleVotingForm)
-        const description = formData.get('simple-voting-description')
+    const simpleVotingForm = document.getElementById("simple-voting-form");
+    simpleVotingForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const formData = new FormData(simpleVotingForm);
+      const description = formData.get("simple-voting-description");
 
-        const targets = ["0x0000000000000000000000000000000000000000"];
-        const values = [0];
-        const calldatas = ["0x00"];
+      const targets = ["0x0000000000000000000000000000000000000000"];
+      const values = [0];
+      const calldatas = ["0x00"];
 
-        try {
-            await miniContract.propose(targets, values, calldatas, description)
-            getPosts()
-            customCallToast('Success create simple voting!')
-            simpleVotingForm.reset()
-        } catch (error) {
-            console.log(error)
-            customCallToast('Error create simple voting!')
-        }
-    })
-</script>
+      try {
+        await miniContract.propose(targets, values, calldatas, description);
+        getPosts();
+        customCallToast("Success create simple voting!");
+        simpleVotingForm.reset();
+      } catch (error) {
+        console.log(error);
+        customCallToast("Error create simple voting!");
+      }
+    });
+  </script>
 
-<!--processing create form-->
-<script>
-    const createForm = document.getElementById('create-proposal-form')
+  <!--processing create form-->
+  <script>
+    const createForm = document.getElementById("create-proposal-form");
 
-    createForm.addEventListener('submit', async (event) => {
-        event.preventDefault()
-        const formData = new FormData(createForm)
-        const create_proposal_targets = formData.get('create-proposal-targets')
-            .split("\n")
-            .map((wallet) => wallet.trim())
-            .filter((wallet) => wallet.trim() !== "");
-        const create_proposal_values = formData.get('create-proposal-values')
-            .split("\n")
-            .map((wallet) => wallet.trim())
-            .filter((wallet) => wallet.trim() !== "");
-        const create_proposal_call_datas = formData.get('create-proposal-call-datas')
-            .split("\n")
-            .map((wallet) => wallet.trim())
-            .filter((wallet) => wallet.trim() !== "");
-        const create_proposal_description = formData.get('create-proposal-description');
+    createForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const formData = new FormData(createForm);
+      const create_proposal_targets = formData
+        .get("create-proposal-targets")
+        .split("\n")
+        .map((wallet) => wallet.trim())
+        .filter((wallet) => wallet.trim() !== "");
+      const create_proposal_values = formData
+        .get("create-proposal-values")
+        .split("\n")
+        .map((wallet) => wallet.trim())
+        .filter((wallet) => wallet.trim() !== "");
+      const create_proposal_call_datas = formData
+        .get("create-proposal-call-datas")
+        .split("\n")
+        .map((wallet) => wallet.trim())
+        .filter((wallet) => wallet.trim() !== "");
+      const create_proposal_description = formData.get(
+        "create-proposal-description"
+      );
 
-        if (!Array.isArray(create_proposal_targets) || create_proposal_targets.length === 0) {
-            customCallToast('Please fill targets field!');
-            return;
-        }
+      if (
+        !Array.isArray(create_proposal_targets) ||
+        create_proposal_targets.length === 0
+      ) {
+        customCallToast("Please fill targets field!");
+        return;
+      }
 
-        if (!Array.isArray(create_proposal_values) || create_proposal_values.length === 0) {
-            customCallToast('Please fill values field!');
-            return;
-        }
+      if (
+        !Array.isArray(create_proposal_values) ||
+        create_proposal_values.length === 0
+      ) {
+        customCallToast("Please fill values field!");
+        return;
+      }
 
-        if (!Array.isArray(create_proposal_call_datas) || create_proposal_call_datas.length === 0) {
-            customCallToast('Please fill calldatas field!');
-            return;
-        }
+      if (
+        !Array.isArray(create_proposal_call_datas) ||
+        create_proposal_call_datas.length === 0
+      ) {
+        customCallToast("Please fill calldatas field!");
+        return;
+      }
 
-        if (typeof create_proposal_description !== 'string' || create_proposal_description.trim() === "") {
-            customCallToast('Please fill description field!');
-            return;
-        }
+      if (
+        typeof create_proposal_description !== "string" ||
+        create_proposal_description.trim() === ""
+      ) {
+        customCallToast("Please fill description field!");
+        return;
+      }
 
-        try {
-            await miniContract.propose(create_proposal_targets, create_proposal_values, create_proposal_call_datas, create_proposal_description)
-            customCallToast('Success create!');
-            createForm.reset()
-        } catch (error) {
-            console.log(error)
-            customCallToast('Error create!')
-        }
-    })
-</script>
+      try {
+        await miniContract.propose(
+          create_proposal_targets,
+          create_proposal_values,
+          create_proposal_call_datas,
+          create_proposal_description
+        );
+        customCallToast("Success create!");
+        createForm.reset();
+      } catch (error) {
+        console.log(error);
+        customCallToast("Error create!");
+      }
+    });
+  </script>
 
-<!--TABS IN DONATE ROUTER-->
-<script>
-    const donateTabs = document.querySelectorAll('.donate-tab')
-    const donateCards = document.querySelectorAll('.donate-card')
+  <!--TABS IN DONATE ROUTER-->
+  <script>
+    const donateTabs = document.querySelectorAll(".donate-tab");
+    const donateCards = document.querySelectorAll(".donate-card");
 
-    donateTabs.forEach(tab => {
-        tab.addEventListener('click', function () {
-            const cardId = tab.getAttribute('data-card-id')
+    donateTabs.forEach((tab) => {
+      tab.addEventListener("click", function () {
+        const cardId = tab.getAttribute("data-card-id");
 
-            donateTabs.forEach((tab) => tab.classList.remove("tab-active"));
-            // Add 'tab-active' class to the clicked tab
-            tab.classList.add("tab-active");
+        donateTabs.forEach((tab) => tab.classList.remove("tab-active"));
+        // Add 'tab-active' class to the clicked tab
+        tab.classList.add("tab-active");
 
-            donateCards.forEach(card => {
-                if (card.id === cardId) {
-                    card.classList.remove('hidden')
-                    card.classList.add('card')
-                } else {
-                    card.classList.add('hidden')
-                    card.classList.remove('card')
-                }
-            })
-        })
-    })
-</script>
-<!--processing donate forms-->
-<script>
-    const nativeTokenForm = document.getElementById('native-token-form')
-    const erc20Form = document.getElementById('erc20-form')
+        donateCards.forEach((card) => {
+          if (card.id === cardId) {
+            card.classList.remove("hidden");
+            card.classList.add("card");
+          } else {
+            card.classList.add("hidden");
+            card.classList.remove("card");
+          }
+        });
+      });
+    });
+  </script>
+  <!--processing donate forms-->
+  <script>
+    const nativeTokenForm = document.getElementById("native-token-form");
+    const erc20Form = document.getElementById("erc20-form");
 
-    nativeTokenForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const formData = new FormData(nativeTokenForm);
-        const native_token_amount = formData.get('native-token-amount')
+    nativeTokenForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const formData = new FormData(nativeTokenForm);
+      const native_token_amount = formData.get("native-token-amount");
 
-        try {
-            await wallet.sendTransaction({
-                to: treasuryAddress,
-                value: ethers.utils.parseEther(native_token_amount, 'ether'),
-            })
-            nativeTokenForm.reset()
-            customCallToast('Success call sendTransaction!')
-        } catch (e) {
-            console.log(e)
-            customCallToast('Error call sendTransaction!')
-        }
-    })
+      try {
+        await wallet.sendTransaction({
+          to: treasuryAddress,
+          value: ethers.utils.parseEther(native_token_amount, "ether"),
+        });
+        nativeTokenForm.reset();
+        customCallToast("Success call sendTransaction!");
+      } catch (e) {
+        console.log(e);
+        customCallToast("Error call sendTransaction!");
+      }
+    });
 
-    erc20Form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        console.log('submit')
-        const formData = new FormData(erc20Form)
-        const erc20_amount = formData.get('erc20-amount')
-        const erc20_token_address = formData.get('erc20-token-address')
+    erc20Form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      console.log("submit");
+      const formData = new FormData(erc20Form);
+      const erc20_amount = formData.get("erc20-amount");
+      const erc20_token_address = formData.get("erc20-token-address");
 
-        if (!/^0x[a-fA-F0-9]{40}$/.test(erc20_token_address)) {
-            customCallToast('Wrong address')
-        }
+      if (!/^0x[a-fA-F0-9]{40}$/.test(erc20_token_address)) {
+        customCallToast("Wrong address");
+      }
 
-        try {
-            const erc20Contract = new ethers.Contract(erc20_token_address, tokenAbi, wallet)
-            await erc20Contract.transfer(treasuryAddress, erc20_amount * (10 ** decimals))
+      try {
+        const erc20Contract = new ethers.Contract(
+          erc20_token_address,
+          tokenAbi,
+          wallet
+        );
+        await erc20Contract.transfer(
+          treasuryAddress,
+          erc20_amount * 10 ** decimals
+        );
 
-            erc20Form.reset()
-            customCallToast('Success call sendTransaction!')
-        } catch (e) {
-            console.log(e)
-            customCallToast('Error call sendTransaction!')
-        }
-    })
-</script>
+        erc20Form.reset();
+        customCallToast("Success call sendTransaction!");
+      } catch (e) {
+        console.log(e);
+        customCallToast("Error call sendTransaction!");
+      }
+    });
+  </script>
 </body>
