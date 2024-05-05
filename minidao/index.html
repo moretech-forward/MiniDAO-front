@@ -1165,6 +1165,7 @@
           tokenAbi,
           wallet
         );
+        const decimals = await tokenContract.decimals();
         await erc20Contract.transfer(
           treasuryAddress,
           erc20_amount * 10 ** decimals
