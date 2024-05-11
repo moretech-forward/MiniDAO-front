@@ -771,7 +771,7 @@
       );
 
       console.log(contractAddress);
-      console.log(wallet.address);
+      console.log(await wallet.getAddress());
     }
   </script>
 
@@ -800,7 +800,7 @@
 
     const vote = async (proposalId, voteId) => {
       try {
-        await tokenContract.delegate(wallet.address);
+        await tokenContract.delegate(await wallet.getAddress());
         await miniContract.castVote(proposalId, voteId);
         customCallToast("Success voting!");
       } catch (e) {
@@ -856,6 +856,8 @@
         const countNeutral = (votes[2] / 10 ** decimals).toString();
         const countDown = (votes[0] / 10 ** decimals).toString();
 
+        const addr = await wallet.getAddress();
+
         postFeed.innerHTML += `
             <div class="flex flex-col gap-4">
             <div class="flex items-center justify-between">
@@ -869,7 +871,7 @@
                     <li>${renderStatus(status_id)}</li>
                 </ul>
                 ${
-                  post.proposer === wallet.address
+                  post.proposer === addr
                     ? `<button onclick="cancelPost('${post.targets}', '${post[3]}', '${post.calldatas}', '${post.description}')" class='btn btn-sm btn-error'>Cancel</button>`
                     : ""
                 }
@@ -970,11 +972,11 @@
           [calldata],
           description
         );
-        customCallToast("Success issue a grant!");
+        customCallToast("The grant proposal has been created!");
         issueGrantForm.reset();
       } catch (error) {
         console.log(error);
-        customCallToast("Error issue a grant!");
+        customCallToast("Error");
       }
     });
 
@@ -996,11 +998,13 @@
           [calldata],
           description
         );
-        customCallToast("Success issue a grant!");
+        customCallToast(
+          "The proposal of an additional issue has been created!"
+        );
         additionalMintForm.reset();
       } catch (error) {
         console.log(error);
-        customCallToast("Error issue a grant!");
+        customCallToast("Error");
       }
     });
 
@@ -1017,7 +1021,7 @@
       try {
         await miniContract.propose(targets, values, calldatas, description);
         getPosts();
-        customCallToast("Success create simple voting!");
+        customCallToast("A simple proposal has been created!");
         simpleVotingForm.reset();
       } catch (error) {
         console.log(error);
